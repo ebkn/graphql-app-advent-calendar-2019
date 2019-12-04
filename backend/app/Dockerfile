@@ -14,6 +14,7 @@ RUN go mod download
 COPY . .
 
 RUN GOOS=linux GOARCH=amd64 go build -o app main.go
+RUN GO111MODULE=off go get github.com/oxequa/realize
 
 
 FROM alpine:3.10

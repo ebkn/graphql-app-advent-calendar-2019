@@ -9,6 +9,7 @@ services:
       target: build
     volumes:
       - ./app:/app
+    command: realize start --run
     environment:
       DB_HOST: db
       DB_PORT: 3306
