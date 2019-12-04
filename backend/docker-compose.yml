@@ -1,0 +1,14 @@
+---
+version: '3.7'
+
+services:
+  app:
+    container_name: graphql-app-backend
+    build:
+      context: ./app
+      target: build
+    volumes:
+      - ./app:/app
+    ports:
+      - 3000:3000
+    tty: true
