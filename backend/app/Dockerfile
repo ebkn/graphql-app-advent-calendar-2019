@@ -21,6 +21,10 @@ FROM alpine:3.10
 
 WORKDIR /app
 
+RUN apk update --no-cache \
+  && apk add --no-cache ca-certificates
+RUN update-ca-certificates
+
 COPY --from=build /app/app .
 
 EXPOSE 3000
