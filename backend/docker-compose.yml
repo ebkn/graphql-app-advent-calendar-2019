@@ -9,6 +9,30 @@ services:
       target: build
     volumes:
       - ./app:/app
+    environment:
+      DB_HOST: db
+      DB_PORT: 3306
+      DB_USER: root
+      DB_PASSWORD: root
+      DB_NAME: graphql-app-development
     ports:
       - 3000:3000
+    depends_on:
+      - db
+    links:
+      - db
+    tty: true
+
+  db:
+    container_name: graphql-app-db
+    image: mysql:8.0.18
+    volumes:
+      - ./db/mysql/data:/var/lib/mysql
+      - ./db/mysql/my.cnf:/etc/mysql/conf.d/my.cnf
+    environment:
+      MYSQL_USER: root
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: graphql-app-development
+    ports:
+      - 3306:3306
     tty: true
