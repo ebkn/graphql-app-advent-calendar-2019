@@ -1,0 +1,26 @@
+type Task implements Node {
+  id: ID!
+  title: String!
+  notes: String!
+  completed: Boolean!
+  due: String! # iso8601
+}
+
+type TaskEdge implements Edge {
+  cursor: String!
+  node: Task!
+}
+
+type TaskConnection implements Connection {
+  pageInfo: PageInfo!
+  edges: [TaskEdge]!
+}
+
+input TasksInput {
+  completed: Boolean!
+}
+
+enum TaskOrderFields {
+  LATEST
+  DUE
+}
