@@ -3,6 +3,7 @@
 package resolver
 
 import (
+	"app/model"
 	"context"
 )
 

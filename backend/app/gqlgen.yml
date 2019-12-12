@@ -3,15 +3,17 @@ schema:
   - "schema/*.graphql"
 
 exec:
-  filename: generated.go
+  filename: resolver/generated.go
+  package: resolver
 
 model:
-  filename: models_gen.go
+  filename: model/models_gen.go
+  package: model
 
 resolver:
-  filename: resolver.go
+  filename: resolver/resolver.go
   type: Resolver
 
 models:
   Task:
-    model: app.Task
+    model: app/model.Task
