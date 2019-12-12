@@ -49,7 +49,7 @@ func (r *queryResolver) Tasks(ctx context.Context, input model.TasksInput, order
 
 		return convertToConnection(tasks, orderBy, page), nil
 	case model.TaskOrderFieldsDue:
-		db, err = pageDB(db, "due", desc, page)
+		db, err = pageDB(db, "UNIX_TIMESTAMP(due)", desc, page)
 		if err != nil {
 			return &model.TaskConnection{PageInfo: &model.PageInfo{}}, err
 		}

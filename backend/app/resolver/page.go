@@ -27,41 +27,41 @@ func pageDB(db *gorm.DB, col string, dir direction, page model.PaginationInput) 
 	}
 
 	if page.After != nil {
-		id, pKey, err := decodeCursor(*page.After)
+		resource1, resource2, err := decodeCursor(*page.After)
 		if err != nil {
 			return db, err
 		}
 
-		if pKey != nil {
+		if resource2 != nil {
 			switch dir {
 			case asc:
-				db = db.Where(gorm.Expr(
-					"(? > ?) OR (? = ? AND id > ?)",
-					col, id,
-					col, id, *pKey,
-				))
+				db = db.Where(
+					fmt.Sprintf("(%s > ?) OR (%s = ? AND id > ?)", col, col),
+					resource1.ID,
+					resource1.ID, resource2.ID,
+				)
 			case desc:
-				db = db.Where(gorm.Expr(
-					"(? > ?) OR (? = ? AND id > ?)",
-					col, id,
-					col, id, *pKey,
-				))
+				db = db.Where(
+					fmt.Sprintf("(%s < ?) OR (%s = ? AND id < ?)", col, col),
+					resource1.ID,
+					resource1.ID, resource2.ID,
+				)
 			}
 		} else {
 			switch dir {
 			case asc:
-				db = db.Where(gorm.Expr("? > ?", col, id))
+				db = db.Where("? > ?", col, resource1.ID)
 			case desc:
-				db = db.Where(gorm.Expr("? < ?", col, id))
+				db = db.Where("? < ?", col, resource1.ID)
 			}
 		}
 	}
 
 	switch dir {
 	case asc:
-		db = db.Order(gorm.Expr("? ASC, id ASC", col))
+		db = db.Order(fmt.Sprintf("%s ASC, id ASC", col))
 	case desc:
-		db = db.Order(gorm.Expr("? DESC, id DESC", col))
+		db = db.Order(fmt.Sprintf("%s DESC, id DESC", col))
 	}
 
 	return db.Limit(limit), nil
