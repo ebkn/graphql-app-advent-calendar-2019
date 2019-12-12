@@ -56,5 +56,30 @@ func (r *mutationResolver) CreateTask(ctx context.Context, input model.CreateTas
 }
 
 func (r *mutationResolver) UpdateTask(ctx context.Context, input model.UpdateTaskInput) (*model.Task, error) {
-	panic("not implemented")
+	db := config.DB()
+
+	var task model.Task
+	if err := db.Where("identifier = ?", input.TaskID).First(&task).Error; err != nil {
+		return &model.Task{}, err
+	}
+
+	params := model.Task{}
+	if input.Title != nil {
+		params.Title = *input.Title
+	}
+	if input.Notes != nil {
+		params.Notes = *input.Notes
+	}
+	if input.Completed != nil {
+		params.Completed = *input.Completed
+	}
+	if input.Due != nil {
+		params.Due = input.Due
+	}
+
+	if err := db.Model(&task).Updates(&params).Error; err != nil {
+		return &model.Task{}, err
+	}
+
+	return &task, nil
 }
