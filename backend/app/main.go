@@ -1,6 +1,7 @@
 package main
 
 import (
+	"app/config"
 	"app/resolver"
 	"net/http"
 
@@ -12,6 +13,10 @@ import (
 
 func main() {
 	e := echo.New()
+
+	if err := config.InitDB(); err != nil {
+		panic(err.Error())
+	}
 
 	e.Use(middleware.Recover())
 	e.Use(middleware.Logger())
