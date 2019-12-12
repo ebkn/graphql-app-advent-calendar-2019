@@ -18,6 +18,10 @@ func main() {
 		panic(err.Error())
 	}
 
+	if err := config.InitShortID(); err != nil {
+		panic(err.Error())
+	}
+
 	e.Use(middleware.Recover())
 	e.Use(middleware.Logger())
 	e.Use(middleware.Gzip())
