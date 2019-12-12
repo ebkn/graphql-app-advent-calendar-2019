@@ -1,6 +1,16 @@
 package model
 
-import "time"
+import (
+	"time"
+
+	v "gopkg.in/go-playground/validator.v9"
+)
+
+var validator *v.Validate
+
+func init() {
+	validator = v.New()
+}
 
 type Task struct {
 	ID         int64
@@ -15,3 +25,7 @@ type Task struct {
 }
 
 func (Task) IsNode() {}
+
+func (t *Task) BeforeSave() error {
+	return validator.Struct(t)
+}
