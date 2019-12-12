@@ -3,7 +3,7 @@ type Task implements Node {
   title: String!
   notes: String!
   completed: Boolean!
-  due: Time!
+  due: Time
 }
 
 type TaskEdge implements Edge {
