@@ -13,6 +13,10 @@ run:
 start:
 	docker-compose exec app realize start --run
 
+.PHONY: generate
+generate:
+	docker-compose exec app go generate ./...
+
 .PHONY: migrate-up
 migrate-up:
 	docker-compose exec app migrate --source file://migrations --database ${DB_CONN} up
