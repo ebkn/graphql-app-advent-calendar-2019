@@ -23,7 +23,7 @@ func main() {
 
 	e.POST("/graphql", func(c echo.Context) error {
 		config := resolver.Config{
-			Resolvers: &resolver.Resolver{},
+			Resolvers: resolver.New(),
 		}
 		h := handler.GraphQL(resolver.NewExecutableSchema(config))
 		h.ServeHTTP(c.Response(), c.Request())
