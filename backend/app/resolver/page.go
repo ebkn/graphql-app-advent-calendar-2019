@@ -158,6 +158,7 @@ func convertToConnection(tasks []*model.Task, orderBy model.TaskOrderFields, pag
 
 		for _, task := range tasks {
 			if task.Due == nil {
+				pageInfo.HasNextPage = false
 				return &model.TaskConnection{PageInfo: &pageInfo, Edges: taskEdges}
 			}
 
