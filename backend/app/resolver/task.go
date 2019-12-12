@@ -12,5 +12,9 @@ func (r *Resolver) Task() TaskResolver {
 }
 
 func (r *taskResolver) ID(ctx context.Context, obj *model.Task) (string, error) {
-	panic("not implemented")
+	if obj == nil {
+		return "", nil
+	}
+
+	return obj.Identifier, nil
 }
