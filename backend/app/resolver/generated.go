@@ -334,7 +334,7 @@ type TaskConnection implements Connection {
 }
 
 input TasksInput {
-  completed: Boolean!
+  completed: Boolean
 }
 
 enum TaskOrderFields {
@@ -2301,7 +2301,7 @@ func (ec *executionContext) unmarshalInputTasksInput(ctx context.Context, obj in
 		switch k {
 		case "completed":
 			var err error
-			it.Completed, err = ec.unmarshalNBoolean2bool(ctx, v)
+			it.Completed, err = ec.unmarshalOBoolean2ᚖbool(ctx, v)
 			if err != nil {
 				return it, err
 			}
