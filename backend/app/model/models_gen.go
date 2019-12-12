@@ -53,7 +53,7 @@ type TaskEdge struct {
 func (TaskEdge) IsEdge() {}
 
 type TasksInput struct {
-	Completed bool `json:"completed"`
+	Completed *bool `json:"completed"`
 }
 
 type UpdateTaskInput struct {

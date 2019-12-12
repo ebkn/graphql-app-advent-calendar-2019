@@ -17,7 +17,7 @@ type TaskConnection implements Connection {
 }
 
 input TasksInput {
-  completed: Boolean!
+  completed: Boolean
 }
 
 enum TaskOrderFields {
