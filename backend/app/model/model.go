@@ -14,4 +14,4 @@ type Task struct {
 	DeletedAt  *time.Time
 }
 
-func (Task) Node() {}
+func (Task) IsNode() {}

@@ -1,6 +1,7 @@
 package main
 
 import (
+	"app/resolver"
 	"net/http"
 
 	"github.com/99designs/gqlgen/handler"
@@ -19,7 +20,15 @@ func main() {
 	e.GET("/health", func(c echo.Context) error {
 		return c.NoContent(http.StatusOK)
 	})
-	e.POST("/query", handler.GraphQL(NewExecutableSchema(Config{Resolvers: &Resolver{}})))
+
+	e.POST("/graphql", func(c echo.Context) error {
+		config := resolver.Config{
+			Resolvers: &resolver.Resolver{},
+		}
+		h := handler.GraphQL(resolver.NewExecutableSchema(config))
+		h.ServeHTTP(c.Response(), c.Request())
+		return nil
+	})
 
 	e.Logger.SetLevel(elog.INFO)
 	e.HideBanner = true
