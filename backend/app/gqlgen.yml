@@ -17,3 +17,6 @@ resolver:
 models:
   Task:
     model: app/model.Task
+    fields:
+      id:
+        resolver: true

@@ -13,7 +13,7 @@ func init() {
 }
 
 type Task struct {
-	ID         int64
+	ID         int
 	Identifier string `validate:"required,max=255"`
 	Title      string `validate:"required,max=255"`
 	Notes      string `validate:"max=65535"`
