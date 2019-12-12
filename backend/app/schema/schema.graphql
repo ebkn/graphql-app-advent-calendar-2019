@@ -1,8 +1,8 @@
-query {
-  tasks(input: TasksInput!, orderBy: TasksOrderFields!, page: PaginationInput!): TaskConnection!
+type Query {
+  tasks(input: TasksInput!, orderBy: TaskOrderFields!, page: PaginationInput!): TaskConnection!
 }
 
-mutation {
+type Mutation {
   createTask(input: CreateTaskInput!): Task!
   updateTask(input: UpdateTaskInput!): Task!
 }
