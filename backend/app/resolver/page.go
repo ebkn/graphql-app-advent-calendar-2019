@@ -163,7 +163,7 @@ func convertToConnection(tasks []*model.Task, orderBy model.TaskOrderFields, pag
 			}
 
 			cursor := createCursor(
-				cursorResource{Name: "task", ID: int((*task.Due).Unix())},
+				cursorResource{Name: "task", ID: int(task.Due.Unix())},
 				&cursorResource{Name: "due", ID: task.ID},
 			)
 
