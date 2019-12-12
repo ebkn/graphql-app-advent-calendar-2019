@@ -4,7 +4,9 @@ WORKDIR /app
 
 RUN apk update --no-cache \
   && apk add --no-cache \
-    git
+    git \
+    gcc \
+    musl-dev
 
 COPY go.mod .
 COPY go.sum .
