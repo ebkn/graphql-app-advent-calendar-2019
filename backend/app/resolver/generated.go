@@ -344,9 +344,9 @@ enum TaskOrderFields {
 
 input CreateTaskInput {
   title: String!
-  notes: String!
-  completed: Boolean!
-  due: Time!
+  notes: String
+  completed: Boolean
+  due: Time
 }
 
 input UpdateTaskInput {
@@ -2250,19 +2250,19 @@ func (ec *executionContext) unmarshalInputCreateTaskInput(ctx context.Context, o
 			}
 		case "notes":
 			var err error
-			it.Notes, err = ec.unmarshalNString2string(ctx, v)
+			it.Notes, err = ec.unmarshalOString2ᚖstring(ctx, v)
 			if err != nil {
 				return it, err
 			}
 		case "completed":
 			var err error
-			it.Completed, err = ec.unmarshalNBoolean2bool(ctx, v)
+			it.Completed, err = ec.unmarshalOBoolean2ᚖbool(ctx, v)
 			if err != nil {
 				return it, err
 			}
 		case "due":
 			var err error
-			it.Due, err = ec.unmarshalNTime2timeᚐTime(ctx, v)
+			it.Due, err = ec.unmarshalOTime2ᚖtimeᚐTime(ctx, v)
 			if err != nil {
 				return it, err
 			}

@@ -22,10 +22,10 @@ type Node interface {
 }
 
 type CreateTaskInput struct {
-	Title     string    `json:"title"`
-	Notes     string    `json:"notes"`
-	Completed bool      `json:"completed"`
-	Due       time.Time `json:"due"`
+	Title     string     `json:"title"`
+	Notes     *string    `json:"notes"`
+	Completed *bool      `json:"completed"`
+	Due       *time.Time `json:"due"`
 }
 
 type PageInfo struct {

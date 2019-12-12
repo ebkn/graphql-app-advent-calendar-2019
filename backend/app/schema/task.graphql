@@ -27,9 +27,9 @@ enum TaskOrderFields {
 
 input CreateTaskInput {
   title: String!
-  notes: String!
-  completed: Boolean!
-  due: Time!
+  notes: String
+  completed: Boolean
+  due: Time
 }
 
 input UpdateTaskInput {

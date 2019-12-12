@@ -18,7 +18,7 @@ type Task struct {
 	Title      string `validate:"required,max=255"`
 	Notes      string `validate:"max=65535"`
 	Completed  bool
-	Due        time.Time
+	Due        *time.Time
 	CreatedAt  time.Time
 	UpdatedAt  time.Time
 	DeletedAt  *time.Time
