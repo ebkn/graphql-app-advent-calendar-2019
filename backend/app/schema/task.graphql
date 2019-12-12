@@ -3,7 +3,7 @@ type Task implements Node {
   title: String!
   notes: String!
   completed: Boolean!
-  due: String! # iso8601
+  due: Time!
 }
 
 type TaskEdge implements Edge {
@@ -23,4 +23,18 @@ input TasksInput {
 enum TaskOrderFields {
   LATEST
   DUE
+}
+
+input CreateTaskInput {
+  title: String!
+  notes: String!
+  completed: Boolean!
+  due: Time!
+}
+
+input UpdateTaskInput {
+  title: String
+  notes: String
+  completed: Boolean
+  due: Time
 }
