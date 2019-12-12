@@ -6,6 +6,7 @@ import (
 	"app/config"
 	"app/model"
 	"context"
+	"errors"
 )
 
 type Resolver struct{}
@@ -26,7 +27,42 @@ func (r *Resolver) Query() QueryResolver {
 }
 
 func (r *queryResolver) Tasks(ctx context.Context, input model.TasksInput, orderBy model.TaskOrderFields, page model.PaginationInput) (*model.TaskConnection, error) {
-	panic("not implemented")
+	db := config.DB()
+
+	if input.Completed != nil {
+		db = db.Where("completed = ?", *input.Completed)
+	}
+
+	var err error
+
+	switch orderBy {
+	case model.TaskOrderFieldsLatest:
+		db, err = pageDB(db, "id", desc, page)
+		if err != nil {
+			return &model.TaskConnection{PageInfo: &model.PageInfo{}}, err
+		}
+
+		var tasks []*model.Task
+		if err := db.Find(&tasks).Error; err != nil {
+			return &model.TaskConnection{PageInfo: &model.PageInfo{}}, err
+		}
+
+		return convertToConnection(tasks, orderBy, page), nil
+	case model.TaskOrderFieldsDue:
+		db, err = pageDB(db, "due", desc, page)
+		if err != nil {
+			return &model.TaskConnection{PageInfo: &model.PageInfo{}}, err
+		}
+
+		var tasks []*model.Task
+		if err := db.Find(&tasks).Error; err != nil {
+			return &model.TaskConnection{PageInfo: &model.PageInfo{}}, err
+		}
+
+		return convertToConnection(tasks, orderBy, page), nil
+	default:
+		return &model.TaskConnection{PageInfo: &model.PageInfo{}}, errors.New("invalid order by")
+	}
 }
 
 func (r *mutationResolver) CreateTask(ctx context.Context, input model.CreateTaskInput) (*model.Task, error) {
