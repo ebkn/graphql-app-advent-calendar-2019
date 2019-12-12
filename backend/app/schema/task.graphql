@@ -33,6 +33,7 @@ input CreateTaskInput {
 }
 
 input UpdateTaskInput {
+  taskID: ID!
   title: String
   notes: String
   completed: Boolean

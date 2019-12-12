@@ -57,6 +57,7 @@ type TasksInput struct {
 }
 
 type UpdateTaskInput struct {
+	TaskID    string     `json:"taskID"`
 	Title     *string    `json:"title"`
 	Notes     *string    `json:"notes"`
 	Completed *bool      `json:"completed"`

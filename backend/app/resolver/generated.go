@@ -350,6 +350,7 @@ input CreateTaskInput {
 }
 
 input UpdateTaskInput {
+  taskID: ID!
   title: String
   notes: String
   completed: Boolean
@@ -2319,6 +2320,12 @@ func (ec *executionContext) unmarshalInputUpdateTaskInput(ctx context.Context, o
 
 	for k, v := range asMap {
 		switch k {
+		case "taskID":
+			var err error
+			it.TaskID, err = ec.unmarshalNID2string(ctx, v)
+			if err != nil {
+				return it, err
+			}
 		case "title":
 			var err error
 			it.Title, err = ec.unmarshalOString2ᚖstring(ctx, v)
@@ -2389,6 +2396,8 @@ func (ec *executionContext) _Node(ctx context.Context, sel ast.SelectionSet, obj
 	switch obj := (obj).(type) {
 	case nil:
 		return graphql.Null
+	case model.Task:
+		return ec._Task(ctx, sel, &obj)
 	case *model.Task:
 		if obj == nil {
 			return graphql.Null
