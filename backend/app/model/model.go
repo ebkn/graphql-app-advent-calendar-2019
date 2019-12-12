@@ -14,9 +14,9 @@ func init() {
 
 type Task struct {
 	ID         int64
-	Identifier string
-	Title      string
-	Notes      string
+	Identifier string `validate:"required,max=255"`
+	Title      string `validate:"required,max=255"`
+	Notes      string `validate:"max=65535"`
 	Completed  bool
 	Due        time.Time
 	CreatedAt  time.Time
