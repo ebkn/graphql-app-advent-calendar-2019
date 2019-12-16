@@ -4,6 +4,7 @@ import (
 	"app/config"
 	"app/resolver"
 	"net/http"
+	"os"
 
 	"github.com/99designs/gqlgen/handler"
 	"github.com/labstack/echo"
@@ -21,6 +22,11 @@ func main() {
 	if err := config.InitShortID(); err != nil {
 		panic(err.Error())
 	}
+
+	e.Use(middleware.CORSWithConfig(middleware.CORSConfig{
+		AllowOrigins: []string{os.Getenv("CORS_ALLOW_ORIGIN")},
+		AllowHeaders: []string{echo.HeaderOrigin, echo.HeaderContentType, echo.HeaderAccept},
+	}))
 
 	e.Use(middleware.Recover())
 	e.Use(middleware.Logger())
