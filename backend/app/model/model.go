@@ -17,7 +17,7 @@ type Task struct {
 	Identifier string `validate:"required,max=255"`
 	Title      string `validate:"required,max=255"`
 	Notes      string `validate:"max=65535"`
-	Completed  *bool   `gorm:"default:false"`
+	Completed  *bool  `gorm:"default:false"`
 	Due        *time.Time
 	CreatedAt  time.Time
 	UpdatedAt  time.Time
