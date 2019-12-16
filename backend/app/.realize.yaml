@@ -1,0 +1,23 @@
+---
+settings:
+  legacy:
+    force: false
+    interval: 0s
+
+schema:
+  - name: app
+    path: .
+    commands:
+      install:
+        status: true
+        method: go build -o app main.go
+      run:
+        status: true
+        method: ./app
+    watcher:
+      extensions:
+        - go
+      paths:
+        - /
+      ignored_paths:
+        - .realize

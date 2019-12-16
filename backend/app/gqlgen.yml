@@ -1,0 +1,22 @@
+---
+schema:
+  - "schema/*.graphql"
+
+exec:
+  filename: resolver/generated.go
+  package: resolver
+
+model:
+  filename: model/models_gen.go
+  package: model
+
+resolver:
+  filename: resolver/resolver.go
+  type: Resolver
+
+models:
+  Task:
+    model: app/model.Task
+    fields:
+      id:
+        resolver: true
