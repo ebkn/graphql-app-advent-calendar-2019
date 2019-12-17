@@ -50,9 +50,9 @@ func pageDB(db *gorm.DB, col string, dir direction, page model.PaginationInput) 
 		} else {
 			switch dir {
 			case asc:
-				db = db.Where("? > ?", col, resource1.ID)
+				db = db.Where(fmt.Sprintf("%s > ?", col), resource1.ID)
 			case desc:
-				db = db.Where("? < ?", col, resource1.ID)
+				db = db.Where(fmt.Sprintf("%s < ?", col), resource1.ID)
 			}
 		}
 	}
