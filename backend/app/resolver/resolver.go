@@ -76,12 +76,15 @@ func (r *mutationResolver) CreateTask(ctx context.Context, input model.CreateTas
 	task := model.Task{
 		Identifier: id,
 		Title:      input.Title,
-		Completed:  input.Completed,
 		Due:        input.Due,
 	}
 	if input.Notes != nil {
 		task.Notes = *input.Notes
 	}
+	if input.Completed != nil {
+		task.Completed = *input.Completed
+	}
+
 	if err := db.Debug().Create(&task).Error; err != nil {
 		return &model.Task{}, err
 	}
