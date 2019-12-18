@@ -37,5 +37,5 @@ input UpdateTaskInput {
   title: String
   notes: String
   completed: Boolean
-  due: Time
+  due: Time # when nil, update task due with nil
 }
