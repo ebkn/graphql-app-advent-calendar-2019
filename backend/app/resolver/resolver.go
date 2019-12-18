@@ -97,18 +97,23 @@ func (r *mutationResolver) UpdateTask(ctx context.Context, input model.UpdateTas
 		return &model.Task{}, err
 	}
 
-	params := model.Task{
-		Completed: input.Completed,
-		Due:       input.Due,
-	}
+	params := map[string]interface{}{}
 	if input.Title != nil {
-		params.Title = *input.Title
+		params["title"] = *input.Title
 	}
 	if input.Notes != nil {
-		params.Notes = *input.Notes
+		params["notes"] = *input.Notes
+	}
+	if input.Completed != nil {
+		params["completed"] = *input.Completed
+	}
+	if input.Due == nil {
+		params["due"] = nil
+	} else {
+		params["due"] = *input.Due
 	}
 
-	if err := db.Model(&task).Updates(&params).Error; err != nil {
+	if err := db.Model(&task).Updates(params).Error; err != nil {
 		return &model.Task{}, err
 	}
 
