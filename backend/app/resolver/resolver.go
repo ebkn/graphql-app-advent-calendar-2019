@@ -85,7 +85,7 @@ func (r *mutationResolver) CreateTask(ctx context.Context, input model.CreateTas
 		task.Completed = *input.Completed
 	}
 
-	if err := db.Debug().Create(&task).Error; err != nil {
+	if err := db.Create(&task).Error; err != nil {
 		return &model.Task{}, err
 	}
 
