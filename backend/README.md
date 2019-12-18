@@ -30,6 +30,9 @@ $ make generate
 
 ### migration
 ```sh
+# create
+$ FILENAME=<filename> make migrate-create
+
 # up
 $ make migrate-up
 

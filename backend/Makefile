@@ -17,6 +17,10 @@ start:
 generate:
 	docker-compose exec app go generate ./...
 
+.PHONY: migrate-create
+migrate-create:
+	docker-compose exec app migrate -ext sql -dir migrations ${FILENAME}
+
 .PHONY: migrate-up
 migrate-up:
 	docker-compose exec app migrate --source file://migrations --database ${DB_CONN} up
