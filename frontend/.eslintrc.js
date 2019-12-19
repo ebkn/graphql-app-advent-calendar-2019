@@ -4,11 +4,11 @@ module.exports = {
     "plugin:react/recommended",
     "plugin:@typescript-eslint/recommended",
     "plugin:@typescript-eslint/eslint-recommended",
-
+    "react-hooks",
     "plugin:prettier/recommended",
     "prettier/@typescript-eslint"
   ],
-  plugins: ["@typescript-eslint", "react-hooks", "graphql"],
+  plugins: ["@typescript-eslint", "react-hooks"],
   overrides: [
     {
         files: ["**/*.tsx"],
