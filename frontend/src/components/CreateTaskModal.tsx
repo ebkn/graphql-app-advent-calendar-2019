@@ -51,38 +51,6 @@ const CreateTaskModal = ({ refetch }: Props) => {
       completed: completedProps.checked,
       due: dueProps.selected?.toISOString()
     },
-    // refetchQueries: () => [{ query: "tasks" }],
-    // update: (cache, { data }) => {
-    //   if (!data) return;
-
-    //   const createdTask = data.createTask;
-    //   const tasksQuery = cache.readQuery<
-    //     FetchTasksQuery,
-    //     FetchTasksQueryVariables
-    //   >({
-    //     query: FetchTasksDocument,
-    //     variables: { ...fetchTaskParam }
-    //   });
-
-    //   if (!tasksQuery) return;
-
-    //   cache.writeQuery<FetchTasksQuery, FetchTasksQueryVariables>({
-    //     query: FetchTasksDocument,
-    //     variables: { ...fetchTaskParam },
-    //     data: {
-    //       ...tasksQuery,
-    //       tasks: {
-    //         ...tasksQuery.tasks,
-    //         edges: [
-    //           ...tasksQuery.tasks.edges,
-    //           {
-    //             node: createTask
-    //           }
-    //         ]
-    //       }
-    //     }
-    //   });
-    // },
     onCompleted: handleMutationCompleted
   });
 
