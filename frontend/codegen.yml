@@ -1,18 +1,25 @@
 schema:
+  # GraphQL APIサーバーのエンドポイント
+  # この配列に@restや@localを使うクエリファイルを列挙することで、それらに関してもhooksを生成してくれる
   - http://localhost:3000/graphql
+# GraphQLのクエリを書いたファイル
 documents: ["query.graphql"]
 generates:
+  # generatorで作成したいファイル名
   ./src/generated/graphql.ts:
     plugins:
       - typescript
       - typescript-operations
       - typescript-react-apollo
     config:
+      # hooksを生成するための設定
       withHOC: false
       withComponent: false
       withHooks: true
+      # gqlgenのcustom scalarをStringとして扱う
       scalars:
-        Time: String
+        Time: string
     hooks:
+      # ファイルが生成されたあとに、eslintのauto-fixを自動では知らせる
       afterOneFileWrite:
         - npx eslint --fix
