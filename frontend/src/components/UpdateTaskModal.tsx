@@ -55,10 +55,6 @@ const CreateTaskModal = ({ task, handleModalClose }: Props) => {
     updateTask();
   }, [updateTask]);
 
-  // if (loading) {
-  //   return <Loading />;
-  // }
-
   return (
     <Modal open={!!task} closeIcon={true} onClose={handleModalClose}>
       <Modal.Header>タスクを編集</Modal.Header>
@@ -100,7 +96,7 @@ const CreateTaskModal = ({ task, handleModalClose }: Props) => {
           positive={true}
           disabled={titleProps.value === ""}
         >
-          <Icon name="plus" /> 保存する
+          <Icon name="sync" /> 保存する
         </Button>
       </Modal.Actions>
     </Modal>
