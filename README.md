@@ -11,5 +11,5 @@
 ### backend - [ebkn](https://github.com/ebkn)
 [README](https://github.com/ebkn/graphql-app-advent-calendar-2019/blob/master/backend/README.md)
 
-### frontend
+### frontend - [Climber22](https://github.com/Climber22)
 [README](https://github.com/ebkn/graphql-app-advent-calendar-2019/blob/master/frontend/README.md)
