@@ -59,7 +59,7 @@ func pageDB(db *gorm.DB, col string, dir direction, page model.PaginationInput) 
 
 	switch dir {
 	case asc:
-		db = db.Order(fmt.Sprintf("%s ASC, id ASC", col))
+		db = db.Order(fmt.Sprintf("%s IS NULL ASC, id ASC", col))
 	case desc:
 		db = db.Order(fmt.Sprintf("%s DESC, id DESC", col))
 	}
