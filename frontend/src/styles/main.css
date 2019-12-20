@@ -1,0 +1,13 @@
+.main_content_box {
+    max-width: 512px;
+    margin: 0 auto;
+}
+
+.order_dropdown {
+    margin: 2vh 0;
+}
+
+.add_button {
+    text-align: center;
+    margin: 2vh auto;
+}

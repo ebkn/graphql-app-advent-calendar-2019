@@ -1,0 +1,64 @@
+fragment taskFields on Task {
+  id
+  title
+  notes
+  completed
+  due
+}
+
+query fetchTasks(
+  $completed: Boolean
+  $order: TaskOrderFields!
+  $first: Int
+  $after: String
+) {
+  tasks(
+    input: { completed: $completed }
+    orderBy: $order
+    page: { first: $first, after: $after }
+  ) {
+    pageInfo {
+      endCursor
+      hasNextPage
+    }
+    edges {
+      cursor
+      node {
+        ...taskFields
+      }
+    }
+  }
+}
+
+mutation createTask(
+  $title: String!
+  $notes: String
+  $completed: Boolean
+  $due: Time
+) {
+  createTask(
+    input: { title: $title, notes: $notes, completed: $completed, due: $due }
+  ) {
+    ...taskFields
+  }
+}
+
+mutation updateTask(
+  $taskID: ID!
+  $title: String
+  $notes: String
+  $completed: Boolean
+  $due: Time
+) {
+  updateTask(
+    input: {
+      taskID: $taskID
+      title: $title
+      notes: $notes
+      completed: $completed
+      due: $due
+    }
+  ) {
+    ...taskFields
+  }
+}
